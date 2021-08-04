@@ -185,6 +185,8 @@ jax_rollout_jitgrad = jax.jit(jax.value_and_grad(jax_rollout))
 
 times = []
 for _ in range(50):
+    rng = jax.random.PRNGKey(seed)
+    
     start = time.time()
     
     rng, key = jax.random.split(rng, 2)  
@@ -204,10 +206,10 @@ jax_loss_jit = jax.jit(jax.value_and_grad(batch_jax_loss))
 
 times = []
 for _ in range(50):
+    rng = jax.random.PRNGKey(seed)
     start = time.time()
     
     rng, key = jax.random.split(rng, 2)  
-    
     # batch = jit_jax_rollout2(p_params, key)
     batch = jax_rollout2(p_params, key)
 
